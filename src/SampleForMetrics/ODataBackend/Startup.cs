@@ -1,17 +1,17 @@
-﻿namespace IIS.SampleForMetrics
+﻿using Microsoft.Owin;
+
+[assembly: OwinStartup(typeof(IIS.SampleForMetrics.Startup))]
+namespace IIS.SampleForMetrics
 {
-    using System;
-    using System.Web;
-    using System.Web.Http;
-
     using ICSSoft.STORMNET.Business;
-
     using Microsoft.Practices.Unity.Configuration;
+    using Owin;
+    using System.Web.Http;
     using Unity;
 
-    public class Global : HttpApplication
+    public class Startup
     {
-        protected void Application_Start(object sender, EventArgs e)
+        public void Configuration(IAppBuilder appBuilder)
         {
             IUnityContainer container = new UnityContainer();
             container.LoadConfiguration();
