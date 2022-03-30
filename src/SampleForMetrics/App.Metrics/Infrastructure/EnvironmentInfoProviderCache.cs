@@ -23,7 +23,7 @@ namespace App.Metrics.Infrastructure
             MachineName = process.MachineName;
             HostName = StringExtensions.GetSafeString(Dns.GetHostName);
 
-            var entryAssembly = Assembly.GetEntryAssembly();
+            var entryAssembly = Assembly.GetEntryAssembly() ?? Assembly.GetExecutingAssembly();
 
             EntryAssemblyName = StringExtensions.GetSafeString(() => entryAssembly.GetName().Name);
             EntryAssemblyVersion = StringExtensions.GetSafeString(() => entryAssembly.GetName().Version.ToString());

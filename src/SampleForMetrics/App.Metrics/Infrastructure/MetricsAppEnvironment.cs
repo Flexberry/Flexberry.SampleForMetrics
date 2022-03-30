@@ -30,8 +30,8 @@ namespace App.Metrics.Infrastructure
 
             ApplicationName = executingAssemblyName.Name;
             ApplicationVersion = executingAssemblyName.Version.ToString();
-            RuntimeFramework = applicationEnvironment.RuntimeFramework.Identifier;
-            RuntimeFrameworkVersion = applicationEnvironment.RuntimeFramework.Version.ToString();
+            RuntimeFramework = applicationEnvironment?.RuntimeFramework?.Identifier ?? "NET";
+            RuntimeFrameworkVersion = applicationEnvironment?.RuntimeFramework?.Version?.ToString() ?? "452";
         }
 #endif
 
