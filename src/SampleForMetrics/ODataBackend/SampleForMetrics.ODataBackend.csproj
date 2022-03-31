@@ -59,6 +59,9 @@
     <Reference Include="App.Metrics.Extensions.Owin.WebApi, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\App.Metrics.Extensions.Owin.WebApi.1.0.0-rc1\lib\net452\App.Metrics.Extensions.Owin.WebApi.dll</HintPath>
     </Reference>
+    <Reference Include="App.Metrics.Extensions.Reporting.TextFile, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\App.Metrics.Extensions.Reporting.TextFile.1.0.0\lib\net452\App.Metrics.Extensions.Reporting.TextFile.dll</HintPath>
+    </Reference>
     <Reference Include="App.Metrics.Formatters.Json, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\App.Metrics.Formatters.Json.1.0.0\lib\net452\App.Metrics.Formatters.Json.dll</HintPath>
     </Reference>
