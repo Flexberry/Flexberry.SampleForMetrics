@@ -291,8 +291,8 @@
     <Reference Include="System.EnterpriseServices">
       <HintPath>System.EnterpriseServices</HintPath>
     </Reference>
-    <ProjectReference Include="..\App.Metrics\App.Metrics.csproj">
-      <Project>{03c145c9-d659-4f22-b1ba-96c0b35b425b}</Project>
+    <ProjectReference Include="..\AppMetrics\src\App.Metrics\App.Metrics.csproj">
+      <Project>{c3ecc99a-aaba-404e-ac57-ae50d5f69673}</Project>
       <Name>App.Metrics</Name>
     </ProjectReference>
     <ProjectReference Include="..\Objects\SampleForMetrics.Objects.csproj">
