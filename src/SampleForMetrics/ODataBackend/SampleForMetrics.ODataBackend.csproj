@@ -50,24 +50,34 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="App.Metrics.Concurrency, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\App.Metrics.Concurrency.1.0.0\lib\net45\App.Metrics.Concurrency.dll</HintPath>
+    <Reference Include="App.Metrics, Version=3.0.0.0, Culture=neutral, PublicKeyToken=0d5193a913d1b812, processorArchitecture=MSIL">
+      <HintPath>..\packages\App.Metrics.3.0.0\lib\net452\App.Metrics.dll</HintPath>
     </Reference>
-    <Reference Include="App.Metrics.Extensions.Owin, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\App.Metrics.Extensions.Owin.1.0.0-rc1\lib\net452\App.Metrics.Extensions.Owin.dll</HintPath>
+    <Reference Include="App.Metrics.Abstractions, Version=3.0.0.0, Culture=neutral, PublicKeyToken=0d5193a913d1b812, processorArchitecture=MSIL">
+      <HintPath>..\packages\App.Metrics.Abstractions.3.0.0\lib\net45\App.Metrics.Abstractions.dll</HintPath>
     </Reference>
-    <Reference Include="App.Metrics.Extensions.Owin.WebApi, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\App.Metrics.Extensions.Owin.WebApi.1.0.0-rc1\lib\net452\App.Metrics.Extensions.Owin.WebApi.dll</HintPath>
+    <Reference Include="App.Metrics.Concurrency, Version=2.0.2.0, Culture=neutral, PublicKeyToken=0d5193a913d1b812, processorArchitecture=MSIL">
+      <HintPath>..\packages\App.Metrics.Concurrency.2.0.2\lib\net45\App.Metrics.Concurrency.dll</HintPath>
     </Reference>
-    <Reference Include="App.Metrics.Extensions.Reporting.TextFile, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\App.Metrics.Extensions.Reporting.TextFile.1.0.0\lib\net452\App.Metrics.Extensions.Reporting.TextFile.dll</HintPath>
+    <Reference Include="App.Metrics.Core, Version=3.0.0.0, Culture=neutral, PublicKeyToken=0d5193a913d1b812, processorArchitecture=MSIL">
+      <HintPath>..\packages\App.Metrics.Core.3.0.0\lib\net452\App.Metrics.Core.dll</HintPath>
     </Reference>
-    <Reference Include="App.Metrics.Formatters.Json, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\App.Metrics.Formatters.Json.1.0.0\lib\net452\App.Metrics.Formatters.Json.dll</HintPath>
+    <Reference Include="App.Metrics.Formatters.Ascii, Version=3.0.0.0, Culture=neutral, PublicKeyToken=0d5193a913d1b812, processorArchitecture=MSIL">
+      <HintPath>..\packages\App.Metrics.Formatters.Ascii.3.0.0\lib\net452\App.Metrics.Formatters.Ascii.dll</HintPath>
+    </Reference>
+    <Reference Include="App.Metrics.Formatters.Json, Version=3.0.0.0, Culture=neutral, PublicKeyToken=0d5193a913d1b812, processorArchitecture=MSIL">
+      <HintPath>..\packages\App.Metrics.Formatters.Json.3.0.0\lib\net452\App.Metrics.Formatters.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="App.Metrics.Reporting.Console, Version=3.0.0.0, Culture=neutral, PublicKeyToken=0d5193a913d1b812, processorArchitecture=MSIL">
+      <HintPath>..\packages\App.Metrics.Reporting.Console.3.0.0\lib\net452\App.Metrics.Reporting.Console.dll</HintPath>
+    </Reference>
+    <Reference Include="App.Metrics.Reporting.TextFile, Version=3.0.0.0, Culture=neutral, PublicKeyToken=0d5193a913d1b812, processorArchitecture=MSIL">
+      <HintPath>..\packages\App.Metrics.Reporting.TextFile.3.0.0\lib\net452\App.Metrics.Reporting.TextFile.dll</HintPath>
     </Reference>
     <Reference Include="log4net">
       <HintPath>../packages/log4net.2.0.12/lib/net45/log4net.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.DotNet.PlatformAbstractions, Version=1.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.DotNet.PlatformAbstractions.1.1.1\lib\net451\Microsoft.DotNet.PlatformAbstractions.dll</HintPath>
     </Reference>
@@ -128,6 +138,7 @@
     <Reference Include="ICSharpCode.SharpZipLib">
       <HintPath>../packages/SharpZipLib.1.2.0/lib/net45/ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
+    <Reference Include="System.Collections" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.ComponentModel.Primitives, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ComponentModel.Primitives.4.3.0\lib\net45\System.ComponentModel.Primitives.dll</HintPath>
@@ -136,6 +147,9 @@
       <HintPath>..\packages\System.ComponentModel.TypeConverter.4.3.0\lib\net45\System.ComponentModel.TypeConverter.dll</HintPath>
     </Reference>
     <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.8.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.8\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
     <Reference Include="System.Numerics" />
     <Reference Include="System.Runtime.CompilerServices.Unsafe">
       <HintPath>../packages/System.Runtime.CompilerServices.Unsafe.4.5.2/lib/netstandard1.0/System.Runtime.CompilerServices.Unsafe.dll</HintPath>
@@ -148,6 +162,9 @@
     </Reference>
     <Reference Include="System.ValueTuple, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ValueTuple.4.3.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=5.2.8.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.8\lib\net45\System.Web.Http.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Http.Owin, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Owin.5.2.3\lib\net45\System.Web.Http.Owin.dll</HintPath>
@@ -200,12 +217,6 @@
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>../packages/Newtonsoft.Json.12.0.3/lib/net45/Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Net.Http.Formatting">
-      <HintPath>../packages/Microsoft.AspNet.WebApi.Client.5.2.7/lib/net45/System.Net.Http.Formatting.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Http">
-      <HintPath>../packages/Microsoft.AspNet.WebApi.Core.5.2.7/lib/net45/System.Web.Http.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.OData.Edm">
       <HintPath>../packages/Microsoft.OData.Edm.7.7.2/lib/net45/Microsoft.OData.Edm.dll</HintPath>
@@ -294,9 +305,9 @@
     <Reference Include="System.EnterpriseServices">
       <HintPath>System.EnterpriseServices</HintPath>
     </Reference>
-    <ProjectReference Include="..\AppMetrics\src\App.Metrics\App.Metrics.csproj">
-      <Project>{c3ecc99a-aaba-404e-ac57-ae50d5f69673}</Project>
-      <Name>App.Metrics</Name>
+    <ProjectReference Include="..\App.Metrics.Extensions.Owin\App.Metrics.Extensions.Owin.csproj">
+      <Project>{79D321EE-2D5D-4AAC-BD12-8E2E28FD8C11}</Project>
+      <Name>App.Metrics.Extensions.Owin</Name>
     </ProjectReference>
     <ProjectReference Include="..\Objects\SampleForMetrics.Objects.csproj">
       <Project>{1d2c5268-95ce-4fb3-ad4f-7e4c238e0e62}</Project>
@@ -308,7 +319,6 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\DefaultDependencyResolver.cs" />
-    <Compile Include="Services\SampleMetrics.cs" />
     <Compile Include="Services\ServiceProviderExtensions.cs" />
     <Compile Include="Startup.cs" />
     <None Include="packages.config" />
