@@ -10,7 +10,6 @@ namespace App.Metrics.Extensions.Owin.Internal
         {
             public const string HealthEndpoint = "/health";
             public const string MetricsEndpoint = "/metrics";
-            public const string MetricsTextEndpoint = "/metrics-text";
             public const string PingEndpoint = "/ping";
         }
 

@@ -34,13 +34,13 @@ namespace App.Metrics.Extensions.Owin.Internal
                         Context = ContextName,
                         Name = "Http Requests",
                         MeasurementUnit = Unit.Requests
-                    };                    
+                    };
                 }
             }
 
             public static class HttpRequests
             {
-                public static string ContextName = "Application.HttpRequests";               
+                public static string ContextName = "Application.HttpRequests";
 
                 public static class ApdexScores
                 {
@@ -61,7 +61,7 @@ namespace App.Metrics.Extensions.Owin.Internal
                         Context = ContextName,
                         Name = "Percentage Error Requests",
                         MeasurementUnit = Unit.Custom("Error Requests")
-                    };                    
+                    };
                 }
 
                 public static class Counters
@@ -116,7 +116,7 @@ namespace App.Metrics.Extensions.Owin.Internal
                         Name = "Http Requests",
                         MeasurementUnit = Unit.Requests
                     };
-                }               
+                }
             }
         }
     }

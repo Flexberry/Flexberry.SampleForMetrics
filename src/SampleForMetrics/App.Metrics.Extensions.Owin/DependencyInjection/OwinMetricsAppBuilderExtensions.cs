@@ -40,25 +40,25 @@ namespace App.Metrics
             var loggerFactory = provider.GetRequiredService<ILoggerFactory>();
             var metrics = provider.GetRequiredService<IMetrics>();
 
+
+            if (appMetricsOptions.Enabled)
+            {
+                app.Use(new ErrorRequestMeterMiddleware(owinMetricsOptions, loggerFactory, metrics));
+                app.Use(new PingEndpointMiddleware(owinMetricsOptions, loggerFactory, metrics));
+                app.Use(new OAuth2ClientWebRequestMeterMiddleware(owinMetricsOptions, loggerFactory, metrics));
+                app.Use(new PerRequestTimerMiddleware(owinMetricsOptions, loggerFactory, metrics));
+                app.Use(new PostAndPutRequestSizeHistogramMiddleware(owinMetricsOptions, loggerFactory, metrics));
+                app.Use(new RequestTimerMiddleware(owinMetricsOptions, loggerFactory, metrics));
+                app.Use(new ApdexMiddleware(owinMetricsOptions, loggerFactory, metrics));
+                app.Use(new ActiveRequestCounterEndpointMiddleware(owinMetricsOptions, loggerFactory, metrics));
+            }
+
             if (owinMetricsOptions.MetricsEndpointEnabled && appMetricsOptions.Enabled)
             {
                 var formatter = provider.GetRequiredService<IMetricsOutputFormatter>();
                 app.Use(new MetricsEndpointMiddleware(owinMetricsOptions, loggerFactory, metrics, formatter));
             }
 
-            if (appMetricsOptions.Enabled)
-            {
-                app.Use(new PingEndpointMiddleware(owinMetricsOptions, loggerFactory, metrics));
-                app.Use(new ActiveRequestCounterEndpointMiddleware(owinMetricsOptions, loggerFactory, metrics));
-                app.Use(new ErrorRequestMeterMiddleware(owinMetricsOptions, loggerFactory, metrics));
-                app.Use(new OAuth2ClientWebRequestMeterMiddleware(owinMetricsOptions, loggerFactory, metrics));
-                app.Use(new PerRequestTimerMiddleware(owinMetricsOptions, loggerFactory, metrics));
-                app.Use(new PostAndPutRequestSizeHistogramMiddleware(owinMetricsOptions, loggerFactory, metrics));
-                app.Use(new RequestTimerMiddleware(owinMetricsOptions, loggerFactory, metrics));
-                app.Use(new ApdexMiddleware(owinMetricsOptions, loggerFactory, metrics));
-            }
-
-            app.Use(new ApdexMiddleware(owinMetricsOptions, loggerFactory, metrics));
             return app;
         }
 

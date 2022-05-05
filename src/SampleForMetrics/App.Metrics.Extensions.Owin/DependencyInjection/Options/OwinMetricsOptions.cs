@@ -30,8 +30,6 @@ namespace App.Metrics.Extensions.Owin.DependencyInjection.Options
 
         public bool MetricsEndpointEnabled { get; set; }
 
-        public string MetricsTextEndpoint { get; set; } = Constants.DefaultRoutePaths.MetricsTextEndpoint.EnsureLeadingSlash();
-
         public bool OAuth2TrackingEnabled { get; set; }
 
         public string PingEndpoint { get; set; } = Constants.DefaultRoutePaths.PingEndpoint.EnsureLeadingSlash();
