@@ -4,8 +4,6 @@
 namespace IIS.SampleForMetrics
 {
     using App.Metrics;
-    using App.Metrics.Extensions.Owin.DependencyInjection.Options;
-    using App.Metrics.Extensions.Owin.WebApi;
     using ICSSoft.STORMNET.Business;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Practices.Unity.Configuration;
@@ -24,7 +22,6 @@ namespace IIS.SampleForMetrics
             GlobalConfiguration.Configure(configuration => ODataConfig.Configure(configuration, container, GlobalConfiguration.DefaultServer));
 
             var httpConfiguration = new HttpConfiguration();
-            httpConfiguration.MessageHandlers.Add(new MetricsWebApiMessageHandler());
             httpConfiguration.RegisterWebApi();
 
             var services = new ServiceCollection();
