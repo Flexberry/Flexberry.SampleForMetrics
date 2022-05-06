@@ -102,7 +102,6 @@
     <Compile Include="DependencyInjection\Internal\OwinMetricsServicesHelper.cs" />
     <Compile Include="DependencyInjection\Options\OwinMetricsOptions.cs" />
     <Compile Include="DependencyInjection\OwinMetricsAppBuilderExtensions.cs" />
-    <Compile Include="DependencyInjection\OwinMetricsCoreBuilderExtensions.cs" />
     <Compile Include="Extensions\HttpContextExtensions.cs" />
     <Compile Include="Extensions\MetricsExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />

@@ -4,8 +4,8 @@
 namespace App.Metrics.Extensions.Owin.DependencyInjection.Internal
 {
     /// <summary>
-    ///     This is a Marker class which is used to determine if all the services were added
-    ///     to when App.Metrics.Extensions.Middleware is loaded.
+    /// This is a Marker class which is used to determine if all the services were added
+    /// to when App.Metrics.Extensions.Middleware is loaded.
     /// </summary>
     internal sealed class OwinMetricsMarkerService
     {

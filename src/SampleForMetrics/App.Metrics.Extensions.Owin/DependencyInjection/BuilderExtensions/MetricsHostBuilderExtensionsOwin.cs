@@ -15,22 +15,30 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddRequiredAspNetPlatformServices(this IServiceCollection builder)
         {
             builder.TryAddSingleton<OwinMetricsMarkerService, OwinMetricsMarkerService>();
-            builder.AddSingleton(resolver => resolver.GetRequiredService<IOptions<OwinMetricsOptions>>().Value);
+           // builder.AddSingleton(resolver => resolver.GetRequiredService<IOptions<OwinMetricsOptions>>().Value);
             return builder;
         }
 
         public static IServiceCollection AddMetrics(this IServiceCollection builder)
         {
-            builder.AddMetrics(c => { });
-            return builder;
+            return builder.AddMetrics(c => { });
         }
 
         public static IServiceCollection AddMetrics(this IServiceCollection builder, Action<MetricsBuilder> onConfig)
         {
-            builder.AddSingleton(new OwinMetricsOptions());
+            return builder.AddMetrics(onConfig, x => new OwinMetricsOptions());
+        }
+
+        public static IServiceCollection AddMetrics(this IServiceCollection builder, Action<MetricsBuilder> onMetricsBuild, Action<OwinMetricsOptions> configuration)
+        {
+            var options = new OwinMetricsOptions();
+            configuration(options);
+            builder.AddSingleton(options);
+            builder.AddRequiredAspNetPlatformServices();
             var metricsBuilder = new MetricsBuilder();
-            onConfig(metricsBuilder);
+            onMetricsBuild(metricsBuilder);
             var metrics = metricsBuilder.Build();
+            builder.AddSingleton(metrics.Options);
             builder.AddSingleton(metrics.DefaultOutputMetricsFormatter);
             builder.AddSingleton<IMetrics>(metrics);
             builder.AddSingleton<IMetricsRoot>(metrics);

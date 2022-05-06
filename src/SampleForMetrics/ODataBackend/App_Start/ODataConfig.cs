@@ -79,7 +79,7 @@
 
         private static string Test(QueryParameters queryParameters)
         {
-            return "Hello world!";
+            throw new NotImplementedException();
         }
     }
 }

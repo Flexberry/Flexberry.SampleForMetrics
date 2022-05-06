@@ -1,21 +1,21 @@
 ﻿// Copyright (c) Allan hardy. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
-
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using App.Metrics.Extensions.Owin.DependencyInjection.Options;
-using App.Metrics.Extensions.Owin.Extensions;
-using Microsoft.Extensions.Logging;
 
 namespace App.Metrics.Extensions.Owin.Middleware
 {
+    using DependencyInjection.Options;
+    using Extensions;
+    using Microsoft.Extensions.Logging;
+    using System.IO;
+    using System.Linq;
+    using System.Net;
+    using System.Text;
+    using System.Text.RegularExpressions;
+
     using AppFunc = Func<IDictionary<string, object>, Task>;
 
     public abstract class AppMetricsMiddleware<TOptions> where TOptions : OwinMetricsOptions, new()

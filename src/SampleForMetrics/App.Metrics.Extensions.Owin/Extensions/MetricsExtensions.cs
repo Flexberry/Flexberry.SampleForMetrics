@@ -5,9 +5,8 @@ using App.Metrics.Extensions.Owin.Extensions;
 using App.Metrics.Extensions.Owin.Internal;
 using App.Metrics.Gauge;
 
-// ReSharper disable CheckNamespace
+
 namespace App.Metrics
-    // ReSharper restore CheckNamespace
 {
     internal static class MetricsExtensions
     {

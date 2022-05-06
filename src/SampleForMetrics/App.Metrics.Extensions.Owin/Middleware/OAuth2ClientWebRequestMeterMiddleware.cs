@@ -1,19 +1,18 @@
 ﻿// Copyright (c) Allan hardy. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
-
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using App.Metrics.Extensions.Owin.DependencyInjection.Options;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Logging;
-using System;
-using App.Metrics.Extensions.Owin.Extensions;
-
 namespace App.Metrics.Extensions.Owin.Middleware
 {
+    using DependencyInjection.Options;
+    using Extensions;
+    using Microsoft.AspNetCore.Http;
+    using Microsoft.Extensions.Logging;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+
+
     /// <summary>
-    ///     Measures the overall request rate of each OAuth2 Client as well as the rate per endpoint
+    /// Measures the overall request rate of each OAuth2 Client as well as the rate per endpoint.
     /// </summary>
     public class OAuth2ClientWebRequestMeterMiddleware : AppMetricsMiddleware<OwinMetricsOptions>
     {

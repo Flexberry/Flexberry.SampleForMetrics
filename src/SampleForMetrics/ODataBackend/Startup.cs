@@ -39,17 +39,19 @@ namespace IIS.SampleForMetrics
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddLogging();
-            services.AddMetricsMiddleware();
             services.AddControllersAsServices();
 
-            services.AddSingleton(new MetricsOptions());
-            services.AddSingleton(new OwinMetricsOptions());
-
-            services.AddMetrics(x =>
-            {
-                x.Report.ToTextFile(o => o.OutputPathAndFileName = Path.Combine(Path.GetTempPath(), "metrics.txt"));
-                x.OutputMetrics.AsJson();
-            });
+            services.AddMetrics(
+                metricsOptions =>
+                {
+                    metricsOptions.Report.ToTextFile(o => o.OutputPathAndFileName = Path.Combine(Path.GetTempPath(), "metrics.txt"));
+                    metricsOptions.OutputMetrics.AsJson();
+                },
+                owinMetricsOptions => {
+                    owinMetricsOptions.MetricsEndpointEnabled = true;
+                    owinMetricsOptions.IgnoredRoutesRegexPatterns = new []{ "metrics" };
+                }
+            );
 
         }
     }

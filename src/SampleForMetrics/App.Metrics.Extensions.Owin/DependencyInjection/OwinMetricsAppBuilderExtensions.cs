@@ -3,9 +3,10 @@
 
 namespace App.Metrics
 {
-    using App.Metrics.Extensions.Owin.DependencyInjection.Options;
-    using App.Metrics.Extensions.Owin.Middleware;
-    using App.Metrics.Formatters;
+    using Extensions.Owin.DependencyInjection.Internal;
+    using Extensions.Owin.DependencyInjection.Options;
+    using Extensions.Owin.Middleware;
+    using Formatters;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
     using Owin;
@@ -16,8 +17,7 @@ namespace App.Metrics
     public static class OwinMetricsAppBuilderExtensions
     {
         /// <summary>
-        /// Adds App Metrics Middleware to the <see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder" /> request
-        /// execution pipeline.
+        ///     Adds App Metrics Middleware to the <see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder" /> request execution pipeline.
         /// </summary>
         /// <param name="app">The <see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder" />.</param>
         /// <param name="provider">The provider.</param>
@@ -25,8 +25,7 @@ namespace App.Metrics
         ///     A reference to this instance after the operation has completed.
         /// </returns>
         /// <exception cref="System.ArgumentNullException">
-        ///     <see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder" /> cannot
-        ///     be null
+        ///     <see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder" /> cannot be null.
         /// </exception>
         public static IAppBuilder UseMetrics(this IAppBuilder app, IServiceProvider provider)
         {
@@ -35,6 +34,7 @@ namespace App.Metrics
                 throw new ArgumentNullException(nameof(app));
             }
 
+            provider.ThrowIfMetricsNotRegistered();
             var appMetricsOptions = provider.GetRequiredService<MetricsOptions>();
             var owinMetricsOptions = provider.GetRequiredService<OwinMetricsOptions>();
             var loggerFactory = provider.GetRequiredService<ILoggerFactory>();
