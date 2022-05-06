@@ -113,7 +113,6 @@
     <Compile Include="Middleware\AppMetricsMiddleware.cs" />
     <Compile Include="Middleware\ErrorRequestMeterMiddleware.cs" />
     <Compile Include="Middleware\MetricsEndpointMiddleware.cs" />
-    <Compile Include="Middleware\OAuth2ClientWebRequestMeterMiddleware.cs" />
     <Compile Include="Middleware\PerRequestTimerMiddleware.cs" />
     <Compile Include="Middleware\PingEndpointMiddleware.cs" />
     <Compile Include="Middleware\PostAndPutRequestSizeHistogramMiddleware.cs" />

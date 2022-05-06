@@ -16,28 +16,6 @@ namespace App.Metrics.Extensions.Owin.Internal
     {
         public static class Contexts
         {
-            public static class OAuth2
-            {
-                public static string ContextName = "Application.OAuth2Client.HttpRequests";
-
-                public static class Meters
-                {
-                    public static Func<string, MeterOptions> EndpointHttpRequests = routeTemplate => new MeterOptions
-                    {
-                        Context = ContextName,
-                        Name = $"{routeTemplate} Http Requests",
-                        MeasurementUnit = Unit.Requests
-                    };
-
-                    public static MeterOptions HttpRequests = new MeterOptions
-                    {
-                        Context = ContextName,
-                        Name = "Http Requests",
-                        MeasurementUnit = Unit.Requests
-                    };
-                }
-            }
-
             public static class HttpRequests
             {
                 public static string ContextName = "Application.HttpRequests";

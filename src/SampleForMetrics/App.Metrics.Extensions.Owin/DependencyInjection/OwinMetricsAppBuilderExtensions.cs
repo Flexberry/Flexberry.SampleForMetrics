@@ -45,7 +45,6 @@ namespace App.Metrics
             {
                 app.Use(new ErrorRequestMeterMiddleware(owinMetricsOptions, loggerFactory, metrics));
                 app.Use(new PingEndpointMiddleware(owinMetricsOptions, loggerFactory, metrics));
-                app.Use(new OAuth2ClientWebRequestMeterMiddleware(owinMetricsOptions, loggerFactory, metrics));
                 app.Use(new PerRequestTimerMiddleware(owinMetricsOptions, loggerFactory, metrics));
                 app.Use(new PostAndPutRequestSizeHistogramMiddleware(owinMetricsOptions, loggerFactory, metrics));
                 app.Use(new RequestTimerMiddleware(owinMetricsOptions, loggerFactory, metrics));

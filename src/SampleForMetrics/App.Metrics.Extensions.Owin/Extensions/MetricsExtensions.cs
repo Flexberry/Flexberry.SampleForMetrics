@@ -36,15 +36,6 @@ namespace App.Metrics
             return metrics;
         }
 
-        public static IMetrics MarkHttpEndpointForOAuthClient(this IMetrics metrics, string routeTemplate, string clientId, int httpStatusCode)
-        {
-            metrics.Measure.Meter.Mark(
-                OwinMetricsRegistry.Contexts.OAuth2.Meters.EndpointHttpRequests(routeTemplate),
-                new MetricSetItem("http_status_code", httpStatusCode.ToString()));
-
-            return metrics;
-        }
-
         public static IMetrics MarkHttpRequestEndpointError(this IMetrics metrics, string routeTemplate, int httpStatusCode)
         {
             metrics.Measure.Meter.Mark(
@@ -59,15 +50,6 @@ namespace App.Metrics
             metrics.Measure.Meter.Mark(
                 OwinMetricsRegistry.Contexts.HttpRequests.Meters.HttpErrorRequests,
                 new MetricSetItem("http_status_code", httpStatusCode.ToString()));
-
-            return metrics;
-        }
-
-        public static IMetrics MarkHttpRequestForOAuthClient(this IMetrics metrics, string clientId, int httpStatusCode)
-        {
-            metrics.Measure.Meter.Mark(
-                OwinMetricsRegistry.Contexts.OAuth2.Meters.HttpRequests,
-                new MetricSetItem(new[] { "client_id", "http_status_code" }, new[] { clientId, httpStatusCode.ToString() }));
 
             return metrics;
         }

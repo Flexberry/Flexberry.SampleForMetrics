@@ -14,7 +14,6 @@ namespace App.Metrics.Extensions.Owin.DependencyInjection.Options
         {
             MetricsEndpointEnabled = true;
             PingEndpointEnabled = true;
-            OAuth2TrackingEnabled = true;
             ApdexTrackingEnabled = true;
             ApdexTSeconds = Constants.ReservoirSampling.DefaultApdexTSeconds;
         }
@@ -23,14 +22,11 @@ namespace App.Metrics.Extensions.Owin.DependencyInjection.Options
 
         public double ApdexTSeconds { get; set; }
 
-
         public IList<string> IgnoredRoutesRegexPatterns { get; set; } = new List<string>();
 
         public string MetricsEndpoint { get; set; } = Constants.DefaultRoutePaths.MetricsEndpoint.EnsureLeadingSlash();
 
         public bool MetricsEndpointEnabled { get; set; }
-
-        public bool OAuth2TrackingEnabled { get; set; }
 
         public string PingEndpoint { get; set; } = Constants.DefaultRoutePaths.PingEndpoint.EnsureLeadingSlash();
 
