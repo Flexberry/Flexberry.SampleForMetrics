@@ -1,29 +1,22 @@
 // Copyright (c) Allan hardy. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
-
-using System;
-using System.Collections.Generic;
-using System.Net;
-using System.Threading.Tasks;
-using App.Metrics.Extensions.Owin.DependencyInjection.Options;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Logging;
-
 namespace App.Metrics.Extensions.Owin.Middleware
 {
+    using DependencyInjection.Options;
+    using Microsoft.AspNetCore.Http;
+    using System;
+    using System.Collections.Generic;
+    using System.Net;
+    using System.Threading.Tasks;
+
     /// <summary>
     ///     Measures the overall error request rate as well as the rate per endpoint.
     ///     Also measures these error rates per OAuth2 Client as a separate metric
     /// </summary>
     public class ErrorRequestMeterMiddleware : AppMetricsMiddleware<OwinMetricsOptions>
     {
-        public ErrorRequestMeterMiddleware(
-            OwinMetricsOptions owinOptions,
-            ILoggerFactory loggerFactory,
-            IMetrics metrics)
-            : base(owinOptions, loggerFactory, metrics)
-
+        public ErrorRequestMeterMiddleware(OwinMetricsOptions owinOptions, IMetrics metrics) : base(owinOptions, metrics)
         {
             if (owinOptions == null)
             {
@@ -42,7 +35,7 @@ namespace App.Metrics.Extensions.Owin.Middleware
 
             if (PerformMetric(environment))
             {
-                Logger.MiddlewareExecuting(GetType());
+                MiddlewareExecuting();
 
                 var routeTemplate = environment.GetMetricsCurrentRouteName();
 
@@ -56,7 +49,7 @@ namespace App.Metrics.Extensions.Owin.Middleware
                 }
             }
 
-            Logger.MiddlewareExecuted(GetType());
+            MiddlewareExecuted();
         }
     }
 }

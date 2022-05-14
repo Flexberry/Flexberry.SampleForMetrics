@@ -1,26 +1,22 @@
 ﻿// Copyright (c) Allan Hardy. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using App.Metrics.Apdex;
-using App.Metrics.Extensions.Owin.DependencyInjection.Options;
-using App.Metrics.Extensions.Owin.Internal;
-using Microsoft.Extensions.Logging;
-
 namespace App.Metrics.Extensions.Owin.Middleware
 {
+    using Apdex;
+    using DependencyInjection.Options;
+    using Internal;
+    using System;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+
+
     public class ApdexMiddleware : AppMetricsMiddleware<OwinMetricsOptions>
     {
         private const string ApdexItemsKey = "__App.Metrics.Apdex__";
         private readonly IApdex _apdexTracking;
 
-        public ApdexMiddleware(
-            OwinMetricsOptions owinOptions,
-            ILoggerFactory loggerFactory,
-            IMetrics metrics)
-            : base(owinOptions, loggerFactory, metrics)
+        public ApdexMiddleware(OwinMetricsOptions owinOptions, IMetrics metrics) : base(owinOptions, metrics)
         {
             _apdexTracking = Metrics.Provider.Apdex.Instance(OwinMetricsRegistry.Contexts.HttpRequests.ApdexScores.Apdex(owinOptions.ApdexTSeconds));
         }
@@ -29,7 +25,7 @@ namespace App.Metrics.Extensions.Owin.Middleware
         {
             if (PerformMetric(environment) && Options.ApdexTrackingEnabled)
             {
-                Logger.MiddlewareExecuting(GetType());
+                MiddlewareExecuting();
 
                 environment[ApdexItemsKey] = _apdexTracking.NewContext();
 
@@ -41,7 +37,7 @@ namespace App.Metrics.Extensions.Owin.Middleware
                 }
                 environment.Remove(ApdexItemsKey);
 
-                Logger.MiddlewareExecuted(GetType());
+                MiddlewareExecuted();
             }
             else
             {

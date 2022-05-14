@@ -106,7 +106,6 @@
     <Compile Include="Extensions\MetricsExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Internal\Constants.cs" />
-    <Compile Include="Internal\OwinMetricsCoreLoggerExtensions.cs" />
     <Compile Include="Internal\OwinMetricsRegistry.cs" />
     <Compile Include="Middleware\ActiveRequestCounterEndpointMiddleware.cs" />
     <Compile Include="Middleware\ApdexMiddleware.cs" />

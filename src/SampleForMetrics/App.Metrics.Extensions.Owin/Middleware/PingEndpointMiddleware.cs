@@ -5,17 +5,14 @@ namespace App.Metrics.Extensions.Owin.Middleware
 {
     using DependencyInjection.Options;
     using Extensions;
-    using Microsoft.Extensions.Logging;
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
     public class PingEndpointMiddleware : AppMetricsMiddleware<OwinMetricsOptions>
     {
-        public PingEndpointMiddleware(OwinMetricsOptions owinOptions,
-            ILoggerFactory loggerFactory,
-            IMetrics metrics)
-            : base(owinOptions, loggerFactory, metrics)
+        public PingEndpointMiddleware(OwinMetricsOptions owinOptions, IMetrics metrics) : base(owinOptions, metrics)
         {
+
         }
 
         public async Task Invoke(IDictionary<string, object> environment)
@@ -24,11 +21,11 @@ namespace App.Metrics.Extensions.Owin.Middleware
 
             if (Options.PingEndpointEnabled && Options.PingEndpoint.IsPresent() && Options.PingEndpoint == requestPath)
             {
-                Logger.MiddlewareExecuting(GetType());
+                MiddlewareExecuting();
 
                 await WriteResponseAsync(environment, "pong", "text/plain");
 
-                Logger.MiddlewareExecuted(GetType());
+                MiddlewareExecuted();
 
                 return;
             }

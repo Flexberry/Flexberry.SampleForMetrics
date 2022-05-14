@@ -1,17 +1,16 @@
 ﻿// Copyright (c) Allan hardy. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
-
-using System;
-using App.Metrics.Apdex;
-using App.Metrics.Counter;
-using App.Metrics.Gauge;
-using App.Metrics.Histogram;
-using App.Metrics.Meter;
-using App.Metrics.Timer;
-
 namespace App.Metrics.Extensions.Owin.Internal
 {
+    using Apdex;
+    using Counter;
+    using Gauge;
+    using Histogram;
+    using Meter;
+    using System;
+    using Timer;
+
     internal static class OwinMetricsRegistry
     {
         public static class Contexts

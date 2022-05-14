@@ -4,11 +4,12 @@
 namespace IIS.SampleForMetrics
 {
     using App.Metrics;
+    using App.Metrics.Extensions.Owin.DependencyInjection.Options;
+    using App.Metrics.Extensions.Owin.Middleware;
     using ICSSoft.STORMNET.Business;
-    using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Practices.Unity.Configuration;
     using Owin;
-    using System.IO;
+    using System;
     using System.Web.Http;
     using Unity;
 
@@ -20,36 +21,48 @@ namespace IIS.SampleForMetrics
             container.LoadConfiguration();
             container.RegisterInstance(DataServiceProvider.DataService);
             GlobalConfiguration.Configure(configuration => ODataConfig.Configure(configuration, container, GlobalConfiguration.DefaultServer));
-
-            var httpConfiguration = new HttpConfiguration();
-            httpConfiguration.RegisterWebApi();
-
-            var services = new ServiceCollection();
-            ConfigureServices(services);
-
-            var provider = services.SetDependencyResolver(httpConfiguration);
-            appBuilder.UseMetrics(provider);
-            appBuilder.UseMetricsReporting(provider);
-            appBuilder.UseWebApi(httpConfiguration);
+            AddMetrics(container);
+            UseMetrics(appBuilder, container);
         }
 
-        public void ConfigureServices(IServiceCollection services)
+        public void AddMetrics(IUnityContainer container)
         {
-            services.AddLogging();
-            services.AddControllersAsServices();
+            var metricsBuilder = new MetricsBuilder();
+            var metrics = metricsBuilder.Build();
+            container.RegisterInstance(metrics.Options);
+            container.RegisterInstance(metrics.DefaultOutputMetricsFormatter);
+            container.RegisterInstance<IMetrics>(metrics);
+            container.RegisterInstance<IMetricsRoot>(metrics);
+        }
 
-            services.AddMetrics(
-                metricsOptions =>
-                {
-                    metricsOptions.Report.ToTextFile(o => o.OutputPathAndFileName = Path.Combine(Path.GetTempPath(), "metrics.txt"));
-                    metricsOptions.OutputMetrics.AsJson();
-                },
-                owinMetricsOptions => {
-                    owinMetricsOptions.MetricsEndpointEnabled = true;
-                    owinMetricsOptions.IgnoredRoutesRegexPatterns = new []{ "metrics" };
-                }
-            );
+        public static IAppBuilder UseMetrics(IAppBuilder app, IUnityContainer provider)
+        {
+            if (app == null)
+            {
+                throw new ArgumentNullException(nameof(app));
+            }
 
+            var appMetricsOptions = provider.Resolve<MetricsOptions>();
+            var owinMetricsOptions = provider.Resolve<OwinMetricsOptions>();
+
+            if (appMetricsOptions.Enabled)
+            {
+                app.Use(provider.Resolve<ErrorRequestMeterMiddleware>());
+                app.Use(provider.Resolve<PingEndpointMiddleware>());
+                app.Use(provider.Resolve<PerRequestTimerMiddleware>());
+                app.Use(provider.Resolve<PostAndPutRequestSizeHistogramMiddleware>());
+                app.Use(provider.Resolve<RequestTimerMiddleware>());
+                app.Use(provider.Resolve<ApdexMiddleware>());
+                app.Use(provider.Resolve<ActiveRequestCounterEndpointMiddleware>());
+            }
+
+            if (owinMetricsOptions.MetricsEndpointEnabled && appMetricsOptions.Enabled)
+            {
+                app.Use(provider.Resolve<MetricsEndpointMiddleware>());
+            }
+
+            return app;
         }
     }
+
 }

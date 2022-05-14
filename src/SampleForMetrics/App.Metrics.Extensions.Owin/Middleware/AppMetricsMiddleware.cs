@@ -9,31 +9,25 @@ namespace App.Metrics.Extensions.Owin.Middleware
 {
     using DependencyInjection.Options;
     using Extensions;
-    using Microsoft.Extensions.Logging;
+    using Logging;
     using System.IO;
     using System.Linq;
     using System.Net;
     using System.Text;
     using System.Text.RegularExpressions;
-
     using AppFunc = Func<IDictionary<string, object>, Task>;
 
     public abstract class AppMetricsMiddleware<TOptions> where TOptions : OwinMetricsOptions, new()
     {
         private readonly Func<string, bool> _shouldRecordMetric;
 
-        protected AppMetricsMiddleware(TOptions owinOptions,
-            ILoggerFactory loggerFactory,
-            IMetrics metrics)
+        private string _middlewareType;
+
+        protected AppMetricsMiddleware(TOptions owinOptions, IMetrics metrics)
         {
             if (owinOptions == null)
             {
                 throw new ArgumentNullException(nameof(owinOptions));
-            }
-
-            if (loggerFactory == null)
-            {
-                throw new ArgumentNullException(nameof(loggerFactory));
             }
 
             if (metrics == null)
@@ -42,24 +36,37 @@ namespace App.Metrics.Extensions.Owin.Middleware
             }
 
             Options = owinOptions;
-            Logger = loggerFactory.CreateLogger(GetType().FullName);
+
             Metrics = metrics;
 
             IReadOnlyList<Regex> ignoredRoutes = Options.IgnoredRoutesRegexPatterns
-                .Select(p => new Regex(p, RegexOptions.Compiled | RegexOptions.IgnoreCase)).ToList();
+                .Select(p => new Regex(p, RegexOptions.Compiled | RegexOptions.IgnoreCase))
+                .ToList();
 
             if (ignoredRoutes.Any())
             {
-                _shouldRecordMetric = path => !ignoredRoutes.Any(ignorePattern => ignorePattern.IsMatch(path.ToString()
-                    .RemoveLeadingSlash()));
+                _shouldRecordMetric = path => !ignoredRoutes.Any(ignorePattern => ignorePattern.IsMatch(path.ToString().RemoveLeadingSlash()));
             }
             else
             {
                 _shouldRecordMetric = path => true;
             }
+
+            _middlewareType = GetType().Name;
+            Logger = LogProvider.GetLogger(_middlewareType);
         }
 
-        public ILogger Logger { get; set; }
+        protected void MiddlewareExecuted()
+        {
+            Logger.Debug($"Executed Owin Metrics Middleare {_middlewareType}");
+        }
+
+        protected void MiddlewareExecuting()
+        {
+            Logger.Debug($"Executing Owin Metrics Middleare {_middlewareType}");
+        }
+
+        public ILog Logger { get; set; }
 
         public IMetrics Metrics { get; set; }
 

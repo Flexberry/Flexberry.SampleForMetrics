@@ -1,21 +1,16 @@
 ﻿// Copyright (c) Allan hardy. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
-
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using App.Metrics.Extensions.Owin.DependencyInjection.Options;
-using Microsoft.Extensions.Logging;
-
 namespace App.Metrics.Extensions.Owin.Middleware
 {
+    using DependencyInjection.Options;
+    using System;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+
     public class ActiveRequestCounterEndpointMiddleware : AppMetricsMiddleware<OwinMetricsOptions>
     {
-        public ActiveRequestCounterEndpointMiddleware(OwinMetricsOptions owinOptions,
-            ILoggerFactory loggerFactory,
-            IMetrics metrics)
-            : base(owinOptions, loggerFactory, metrics)
+        public ActiveRequestCounterEndpointMiddleware(OwinMetricsOptions owinOptions, IMetrics metrics) : base(owinOptions, metrics)
         {
             if (owinOptions == null)
             {
@@ -27,15 +22,11 @@ namespace App.Metrics.Extensions.Owin.Middleware
         {
             if (PerformMetric(environment))
             {
-                Logger.MiddlewareExecuting(GetType());
-
+                MiddlewareExecuting();
                 Metrics.IncrementActiveRequests();
-
                 await Next(environment);
-
                 Metrics.DecrementActiveRequests();
-
-                Logger.MiddlewareExecuted(GetType());
+                MiddlewareExecuted();
             }
             else
             {

@@ -9,5 +9,6 @@ namespace App.Metrics.Extensions.Owin.DependencyInjection.Internal
     /// </summary>
     internal sealed class OwinMetricsMarkerService
     {
+
     }
 }

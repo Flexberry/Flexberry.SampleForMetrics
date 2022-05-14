@@ -43,19 +43,19 @@ namespace App.Metrics
 
             if (appMetricsOptions.Enabled)
             {
-                app.Use(new ErrorRequestMeterMiddleware(owinMetricsOptions, loggerFactory, metrics));
-                app.Use(new PingEndpointMiddleware(owinMetricsOptions, loggerFactory, metrics));
-                app.Use(new PerRequestTimerMiddleware(owinMetricsOptions, loggerFactory, metrics));
-                app.Use(new PostAndPutRequestSizeHistogramMiddleware(owinMetricsOptions, loggerFactory, metrics));
-                app.Use(new RequestTimerMiddleware(owinMetricsOptions, loggerFactory, metrics));
-                app.Use(new ApdexMiddleware(owinMetricsOptions, loggerFactory, metrics));
-                app.Use(new ActiveRequestCounterEndpointMiddleware(owinMetricsOptions, loggerFactory, metrics));
+                //app.Use(new ErrorRequestMeterMiddleware(owinMetricsOptions, loggerFactory, metrics));
+                //app.Use(new PingEndpointMiddleware(owinMetricsOptions, loggerFactory, metrics));
+                //app.Use(new PerRequestTimerMiddleware(owinMetricsOptions, loggerFactory, metrics));
+                //app.Use(new PostAndPutRequestSizeHistogramMiddleware(owinMetricsOptions, loggerFactory, metrics));
+                //app.Use(new RequestTimerMiddleware(owinMetricsOptions, loggerFactory, metrics));
+                //app.Use(new ApdexMiddleware(owinMetricsOptions, loggerFactory, metrics));
+                app.Use<ActiveRequestCounterEndpointMiddleware>();
             }
 
             if (owinMetricsOptions.MetricsEndpointEnabled && appMetricsOptions.Enabled)
             {
                 var formatter = provider.GetRequiredService<IMetricsOutputFormatter>();
-                app.Use(new MetricsEndpointMiddleware(owinMetricsOptions, loggerFactory, metrics, formatter));
+               // app.Use(new MetricsEndpointMiddleware(owinMetricsOptions, loggerFactory, metrics, formatter));
             }
 
             return app;
