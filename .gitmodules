@@ -1,0 +1,4 @@
+[submodule "src/SampleForMetrics/AppMetrics"]
+	path = src/SampleForMetrics/AppMetrics
+	url = https://github.com/Flexberry/AppMetrics.git
+	branch = 1.0.0_226287
