@@ -1,23 +1,18 @@
 ﻿namespace IIS.SampleForMetrics
 {
-    using System;
-    using System.Reflection;
-    using System.Web.Http;
-
-    using ICSSoft.STORMNET;
     using ICSSoft.Services;
+    using ICSSoft.STORMNET;
     using IIS.Caseberry.Logging.Objects;
-
     using NewPlatform.Flexberry;
-    using NewPlatform.Flexberry.AspNet.WebApi.Cors;
-    using NewPlatform.Flexberry.ORM.ODataService;
     using NewPlatform.Flexberry.ORM.ODataService.Extensions;
     using NewPlatform.Flexberry.ORM.ODataService.Files;
     using NewPlatform.Flexberry.ORM.ODataService.Functions;
     using NewPlatform.Flexberry.ORM.ODataService.Model;
     using NewPlatform.Flexberry.ORM.ODataService.WebApi.Extensions;
     using NewPlatform.Flexberry.Services;
-
+    using System;
+    using System.Reflection;
+    using System.Web.Http;
     using Unity;
     using Unity.AspNet.WebApi;
 
@@ -84,7 +79,7 @@
 
         private static string Test(QueryParameters queryParameters)
         {
-            return "Hello world!";
+            throw new NotImplementedException();
         }
     }
 }
